@@ -15,10 +15,10 @@ namespace Mind_Plus_API_Isabelle.Controllers
             _loginRepository = loginRepository;
         }
 
-        [HttpGet]
+        [HttpGet] //[substituir por post]
         public async Task<IActionResult> VerifyLogin(string email, string password)
         {
-            return Ok(await _loginRepository.VerifyLogin(email, password));
+            return Ok(await _loginRepository.VerifyLogin(email, password)); //try catch vai aqui com a mensagem de erro > utiliza/retorna                                            BAD REQUEST
         }
     }
 }

@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Mind-Plus-API-Isabelle",
+    "\\Mind-Plus-API-Isabelle\\Contracts",
+    "\\Mind-Plus-API-Isabelle\\Controllers",
+    "\\Mind-Plus-API-Isabelle\\DTO",
+    "\\Mind-Plus-API-Isabelle\\Entity",
+    "\\Mind-Plus-API-Isabelle\\Infraestructure",
+    "\\Mind-Plus-API-Isabelle\\obj",
+    "\\Mind-Plus-API-Isabelle\\Properties",
+    "\\Mind-Plus-API-Isabelle\\Repository"
+  ],
+  "SelectedNode": "\\Mind-Plus-API-Isabelle\\Controllers\\EmployeesController.cs",
+  "PreviewInSolutionExplorer": false
+}

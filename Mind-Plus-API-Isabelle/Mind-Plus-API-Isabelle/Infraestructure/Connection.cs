@@ -5,7 +5,7 @@ namespace Mind_Plus_API_Isabelle.Infraestructure
 {
     public class Connection
     {
-        protected string connectionString = "Server=localhost;Database=backend;User=root;Password=root;"; //trocar nome
+        protected string connectionString = "Server=localhost;Database=mindplus;User=root;Password=root;"; //trocar nome
 
         protected MySqlConnection GetConnection()
         {

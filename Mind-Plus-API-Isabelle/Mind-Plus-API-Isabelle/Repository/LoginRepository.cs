@@ -7,7 +7,7 @@ namespace Mind_Plus_API_Isabelle.Repository
 {
     public class LoginRepository : Connection, ILoginRepository
     {
-        public async Task<EmployeesEntity> VerifyLogin(string email, string password)
+        public async Task<EmployeesEntity> VerifyLogin(string email, string password) //utilizar token do EmployeesTokenDTO
         {
             string sql = "SELECT * FROM colaboradores WHERE Email like @email AND Password like @password";
             return await GetConnection().QueryFirstAsync<EmployeesEntity>(sql, new { email, password });
