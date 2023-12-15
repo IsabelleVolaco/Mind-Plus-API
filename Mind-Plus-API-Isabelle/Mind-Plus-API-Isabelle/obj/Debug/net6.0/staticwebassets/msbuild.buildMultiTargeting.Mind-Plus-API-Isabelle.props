@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Mind-Plus-API-Isabelle.props" />
+</Project>

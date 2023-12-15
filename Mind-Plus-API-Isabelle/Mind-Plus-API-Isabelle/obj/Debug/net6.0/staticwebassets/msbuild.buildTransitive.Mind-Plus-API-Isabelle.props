@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\Mind-Plus-API-Isabelle.props" />
+</Project>
