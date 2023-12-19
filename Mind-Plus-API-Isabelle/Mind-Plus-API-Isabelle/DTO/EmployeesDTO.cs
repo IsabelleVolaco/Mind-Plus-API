@@ -13,5 +13,8 @@
         public string Password { get; set; }
         public string Contract { get; set; }
 
+
+
+        public string Role { get; set; } //aula 19.12
     }
 }

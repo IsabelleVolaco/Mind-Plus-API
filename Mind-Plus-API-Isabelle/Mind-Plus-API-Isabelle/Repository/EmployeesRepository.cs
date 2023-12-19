@@ -12,8 +12,8 @@ namespace Mind_Plus_API_Isabelle.Repository
         public async Task AddEmployee(EmployeesDTO employee) 
         {
             string sql = @"
-                INSERT INTO colaboradores (Name, Email, Phone, Address, Office, Company, Password, Contract)
-                            VALUE (@Name, @Email, @Phone, @Address, @Office, @Company, @Password, @Contract)
+                INSERT INTO colaboradores (Name, Email, Phone, Address, Office, Company, Password, Contract) /////////////////////Role
+                            VALUE (@Name, @Email, @Phone, @Address, @Office, @Company, @Password, @Contract) ////////////////////@Role
             ";
             await Execute(sql, employee); 
         }

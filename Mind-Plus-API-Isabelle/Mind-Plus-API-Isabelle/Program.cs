@@ -20,7 +20,13 @@ namespace Mind_Plus_API_Isabelle
             builder.Services.AddTransient<IFormsRepository, FormsRepository>();
 
             builder.Services.AddSwaggerGen();
-
+            builder.Services.AddSwaggerGen();
+            builder.Services.AddAuthentication()
+  /*
+                .AddBasic(BasicScheme, _ => { })
+                .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
+                { ...}
+  */
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
