@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Mind_Plus_API_Isabelle.Contracts;
 using Mind_Plus_API_Isabelle.DTO;
 using Mind_Plus_API_Isabelle.Entity;
@@ -43,5 +44,19 @@ namespace Mind_Plus_API_Isabelle.Controllers
         {
             return Ok(await _employeesRepository.ViewEmployee());
         }
+
+        //a verificar
+        [HttpPost]
+        [Route("salarios")]
+        [Authorize(Roles = "admin")] //-------------- PERMITE QUE ESTES ACESSEM SUAS RESPECTIVAS INFORMAÇÕES (Quais são os seus papéis)
+
+        public string Salarios() => "Salario"; // Permissionamento do backend ---> vai liberar os endpoints apenas para quem tem a permissão (Respectivamente)
+
+
+        [HttpPost]
+        [Route("funcionarios")]
+        [Authorize(Roles = "default")]
+
+        public string Funcionarios() => "Funcionarios";
     }
 }

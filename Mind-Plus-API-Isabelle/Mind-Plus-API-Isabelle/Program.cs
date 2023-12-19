@@ -1,5 +1,8 @@
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 using Mind_Plus_API_Isabelle.Contracts;
 using Mind_Plus_API_Isabelle.Repository;
+using System.Text;
 
 namespace Mind_Plus_API_Isabelle
 {
@@ -17,16 +20,60 @@ namespace Mind_Plus_API_Isabelle
 
             builder.Services.AddTransient<IEmployeesRepository, EmployeesRepository>();
             builder.Services.AddTransient<ILoginRepository, LoginRepository>();
-            builder.Services.AddTransient<IFormsRepository, FormsRepository>();
+            builder.Services.AddTransient<IFormsRepository, FormsRepository>(); //alterado
 
-            builder.Services.AddSwaggerGen();
-            builder.Services.AddSwaggerGen();
-            builder.Services.AddAuthentication()
-  /*
-                .AddBasic(BasicScheme, _ => { })
-                .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
-                { ...}
-  */
+            builder.Services.AddCors(); //alterado
+
+            var key = Encoding.ASCII.GetBytes(Configuration.JWTSecret); //alterado
+
+            builder.Services.AddSwaggerGen(c => //alterado
+            {
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    In = ParameterLocation.Header
+                });
+
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                            Scheme = "oauth2",
+                            Name = "Bearer",
+                            In = ParameterLocation.Header
+                        },
+                        new List<string>() { }
+                    }
+                });
+
+            });
+
+            builder.Services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+  
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -38,9 +85,17 @@ namespace Mind_Plus_API_Isabelle
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication(); //alterado
             app.UseAuthorization();
 
             app.MapControllers();
+
+            app.UseCors(x => //alterado
+            {
+                x.AllowAnyOrigin();
+                x.AllowAnyMethod();
+                x.AllowAnyHeader();
+            });
 
             app.Run();
         }

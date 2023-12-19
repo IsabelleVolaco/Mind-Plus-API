@@ -31,6 +31,7 @@ namespace Mind_Plus_API_Isabelle.Repository
                        Company = @Company,
                        Password = @Password,
                        Contract = @Contract
+                     // Role = @Role
                  WHERE Id = @Id
             ";
             await Execute(sql, employee);

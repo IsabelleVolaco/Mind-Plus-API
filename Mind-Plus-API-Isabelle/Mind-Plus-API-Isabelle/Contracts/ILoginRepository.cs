@@ -7,6 +7,7 @@ namespace Mind_Plus_API_Isabelle.Contracts
     {
         Task<EmployeesEntity> VerifyLogin(string email, string password);
 
+        Task<EmployeesTokenDTO> Login(EmployeesLoginDTO employee);
         //Task<UserTokenDTO> LogIn(UserLoginDTO user);
     }
 }
